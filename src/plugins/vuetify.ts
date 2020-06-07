@@ -1,17 +1,21 @@
+import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import es from 'vuetify/src/locale/es';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  customProperties: true,
+  iconfont: 'mdi'
+});
 
-export default new Vuetify({
+export const vuetify = new Vuetify({
   theme: {
       options: {
         customProperties: true,
       },
     themes: {
       light: {
-        primary: '#ee44aa',
+        primary: '#EE44AA',
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',
@@ -21,8 +25,8 @@ export default new Vuetify({
       },
     },
   },
-    lang: {
+  lang: {
       locales: { es },
       current: 'es',
-    },
+    }
 });
