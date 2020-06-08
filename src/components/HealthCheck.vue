@@ -8,7 +8,7 @@
         <v-layout wrap align-content-center justify-space-around>
           <v-flex sm1 style="max-width: 15vw">
             <v-container>
-              <v-img src="/public/img/facebook.svg" max-width="8vw" min-width="8vw" title="FACEBOOK"></v-img>
+              <v-img src="/img/facebook.svg" max-width="8vw" min-width="8vw" title="FACEBOOK"></v-img>
               <v-layout wrap align-content-center>
                 <v-spacer></v-spacer>
                 <v-flex align-self-center>
@@ -23,7 +23,7 @@
           <v-flex sm1 style="max-width: 15vw">
 
             <v-container>
-              <v-img src="/public/img/s3.svg" max-width="8vw" min-width="8vw" title="AWS S3"></v-img>
+              <v-img src="/img/s3.svg" max-width="8vw" min-width="8vw" title="AWS S3"></v-img>
               <v-layout wrap align-content-center>
                 <v-spacer></v-spacer>
                 <v-flex align-self-center>
@@ -37,7 +37,7 @@
           </v-flex>
           <v-flex sm1 style="max-width: 15vw">
             <v-container>
-              <v-img src="/public/img/sequelize.svg" max-width="8vw" min-width="8vw" title="DATABASE"></v-img>
+              <v-img src="/img/sequelize.svg" max-width="8vw" min-width="8vw" title="DATABASE"></v-img>
               <v-layout wrap align-content-center>
                 <v-spacer></v-spacer>
                 <v-flex align-self-center>
@@ -52,7 +52,7 @@
           <v-flex sm1 style="max-width: 15vw">
 
             <v-container>
-              <v-img src="/public/img/dialogflow.svg" max-width="10vw" min-width="9vw" title="DIALOGFLOW"></v-img>
+              <v-img src="/img/dialogflow.svg" max-width="10vw" min-width="9vw" title="DIALOGFLOW"></v-img>
               <v-layout wrap align-content-center>
                 <v-spacer></v-spacer>
                 <v-flex align-self-center>

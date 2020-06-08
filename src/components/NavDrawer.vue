@@ -10,7 +10,7 @@
     <v-list dense nav>
       <v-list-item two-line>
         <v-list-item-avatar>
-          <img src="/public/img/academibot.png" alt="">
+          <img src="/img/academibot.png" alt="">
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>AcademiBot</v-list-item-title>
