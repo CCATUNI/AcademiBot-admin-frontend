@@ -15,7 +15,7 @@ export const vuetify = new Vuetify({
       },
     themes: {
       light: {
-        primary: '#EE44AA',
+        primary: '#AB4F09',
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',

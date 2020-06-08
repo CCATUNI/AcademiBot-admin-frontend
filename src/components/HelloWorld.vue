@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
-                src="/public/img/academibot.png"
+                src="/img/academibot.png"
                 class="my-3"
                 contain
                 height="200"
