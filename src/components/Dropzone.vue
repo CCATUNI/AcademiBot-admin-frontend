@@ -2,7 +2,6 @@
   <div>
     <vue-dropzone ref="dropzone" id="customdropzone"
                   @vdropzone-file-added="vfileAdded"
-                  @vdropzone-error="verror"
                   @vdropzone-removed-file="vremoved"
                   :options="dropzoneOptions"
                   :duplicateCheck="true"
@@ -63,7 +62,6 @@
         },
         methods: {
             vfileAdded(file) {
-                console.log(this.maxFiles, this.filecounter);
                 this.filecounter++;
                 if (this.fileAdder) this.fileAdder(file);
                 if (this.filecounter > this.maxFiles) {
@@ -71,16 +69,12 @@
                     dropZone.removeFile(file);
                     return;
                 }
-                console.log('Added');
                 const pbar = document.querySelector('.dz-progress'); // removes progress bar
                 if (pbar) pbar.remove();
                 document.querySelector('.dz-preview');
                 
                 //console.log(preview.style);
                 // TODO: CENTER FILE UPLOADES IN DROP ZONE
-            },
-            verror(file) {
-                console.log(file.name);
             },
             vremoved(file) {
                 if (this.fileRemover) this.fileRemover(file);
