@@ -108,13 +108,17 @@
                           'Content-Type': 'multipart/form-data'
                       }
                   });
+                  if (response.data.total === 0) {
+                    throw new Error('No se ha encontrado a ningun usuario.');
+                  }
                   this.showProgress = true;
-                  if (response.data.total === 0) return;
                   this.progress(response.data.id)
                   .catch(() => {
                     this.sending = false;
                   });
-              } catch {}
+              } catch {
+                this.sending = false;
+              }
           },
           async progress(id: string) {
               const url = `${BACK_URL}/api/message/massive/${id}`;
