@@ -14,12 +14,12 @@
             <v-card-title class="headline">Error</v-card-title>
       
             <v-card-text>
-              <p>El siguiente error se ha encontrado {{creationError.message}}</p>
-              <p>La url al objeto es: <a :href="creationError.url">LINK</a></p>
+              <p>El siguiente error se ha encontrado: {{creationError.message}}</p>
+              <p v-if="creationError.url">La url al objeto es: <a :href="creationError.url">LINK</a></p>
               <p v-if="creationError.ruta">El archivo se encuentra en "{{creationError.ruta}}"</p>
             </v-card-text>
       
-            <v-card-actions>
+            <v-card-actions v-if="creationError.url">
               <v-spacer></v-spacer>
               <v-btn
                       color="green darken-1"
@@ -86,7 +86,18 @@
           />
           <v-layout wrap align-left>
             <v-spacer></v-spacer>
-            <v-flex xs12 sm6 d-flex>
+            <v-flex xs12 sm3 d-flex>
+              <v-select
+                      label="Carpeta"
+                      ref="carpeta"
+                      :value="submissionData.carpeta"
+                      :rules="[v => !!v]"
+                      name="folder"
+                      v-if="myFiles.length"
+                      :items="folders"
+              />
+            </v-flex>
+            <v-flex xs12 sm5 d-flex>
               <v-text-field
                       label="Nombre"
                       :rules="[v =>  /^[A-Za-z\-0-9_]+$/.test(v) || 'Contiene caracter no válido', v => !!v || 'Campo requerido']"
@@ -109,9 +120,7 @@
                       hint="El número de página del archivo si hay más de uno"
               />
             </v-flex>
-            <v-flex xs12 sm2 d-flex>
-              <input type="hidden" name="extension" :value="submissionData.extension" />
-            </v-flex>
+            <input type="hidden" name="extension" :value="submissionData.extension" />
             <v-spacer></v-spacer>
           </v-layout>
           <v-divider></v-divider>
@@ -142,11 +151,6 @@
     import {BACK_URL} from "@/config";
 
     let canSubmit = true;
-    const submissionData: {[p: string]: any} = {
-        extension: '',
-        pagina: "1",
-        fileFirstName: ''
-    }
     export default Vue.extend({
         name: "Uploads",
         data() {
@@ -157,7 +161,12 @@
                 containerStyle: {
                     'margin-top': '3em'
                 },
-                submissionData,
+                submissionData: {
+                  extension: '',
+                  pagina: "1",
+                  fileFirstName: '',
+                  carpeta: ''
+                } as {[p: string]: any},
                 facultades: [],
                 cursos: [],
                 flag: true,
@@ -168,7 +177,19 @@
                     url: '',
                     message: ''
                 },
-                errorDialog: false
+                errorDialog: false,
+                folders: [
+                  {value: 'entrada', text: 'prueba de entrada'},
+                  {value: '1pc', text: '1pc'},
+                  {value: '2pc', text: '2pc'},
+                  {value: 'examen-parcial', text: 'examen parcial'},
+                  {value: '3pc', text: '3pc'},
+                  {value: '4pc', text: '4pc'},
+                  {value: '5pc', text: '5pc'},
+                  {value: 'examen-final', text: 'examen final'},
+                  {value: 'sustitutorio', text: 'examen sustitutorio'},
+                  {value: 'material-adicional', text: 'material adicional'}
+                ]
             }
         },
         watch: {
@@ -188,12 +209,12 @@
                 this.myFiles.push(file);
                 const filename = file.name;
                 const parts = filename.split('.');
-                submissionData.extension = parts[parts.length - 1];
+                this.submissionData.extension = parts[parts.length - 1];
             },
             removeFile(file: File) {
                 const i = this.myFiles.indexOf(file);
                 this.myFiles.splice(i, 1);
-                submissionData.extension = '';
+                this.submissionData.extension = '';
             },
             async submit(opts?: { force: boolean }) {
                 const valid = (this.$refs.form as Vue & { validate: () => boolean }).validate();
