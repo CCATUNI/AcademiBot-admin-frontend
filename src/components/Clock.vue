@@ -1,11 +1,11 @@
 <template>
   <div class="clock">
     <div class="clock__hours" style="padding-top: 0.4em; padding-bottom: 0.9em; padding-left: 0.7em">
-      <span class="clock__hourtime" v-text="hourtime"></span>
-      <span v-text="hours" style="top: 1em"></span>
+      <span class="clock__hourtime" v-text="getAmPm(this.time)"></span>
+      <span v-text="getHour(true, this.time)" style="top: 1em"></span>
     </div>
-    <div class="clock__minutes" v-text="minutes" style="padding-top: 0.4em; padding-bottom: 0.9em;"></div>
-    <div class="clock__seconds" v-text="seconds" style="padding-top: 0.4em; padding-bottom: 0.9em;"></div>
+    <div class="clock__minutes" v-text="getMinutes(this.time)" style="padding-top: 0.4em; padding-bottom: 0.9em;"></div>
+    <div class="clock__seconds" v-text="getSeconds(this.time)" style="padding-top: 0.4em; padding-bottom: 0.9em;"></div>
   </div>
 </template>
 
@@ -49,6 +49,30 @@
               hourtime: getAmPm(this.time),
               twelveHour: true
           }
+      },
+      methods: {
+        padZero(number: number) {
+          if (number < 10) {
+            return "0" + number;
+          }
+          return '' + number;
+        },
+        getHour(twelveHour: boolean, time: string) {
+          let hours = parseInt(time.split(':')[0]);
+          if (twelveHour && hours > 12) {
+            hours = hours - 12;
+          }
+          return padZero(hours);
+        },
+        getSeconds(time: string) {
+          return padZero(parseInt(time.split(':')[2]));
+        },
+        getMinutes(time: string) {
+          return padZero(parseInt(time.split(':')[1]));
+        },
+        getAmPm(time: string) {
+          return parseInt(time.split(':')[0]) > 12 ? "pm" : "am";
+        }
       }
   })
 </script>
